@@ -5964,8 +5964,29 @@ var DRIVE_IMAGE = function(id){
   return 'https://drive.google.com/uc?export=view&id=' + id;
 };
 
-/* HOME memakai aset GitHub responsif. Menu lama memakai gambar Drive. */
-setImageSource('dailyBackground', DRIVE_IMAGE('13u-dLdtelhrjQNw7pjJQNb4D2aSPBxgx'));
+/* HOME dan MENU DAILY TEST memakai aset GitHub responsif. */
+function loadDailyResponsiveImage() {
+  var width = window.innerWidth || document.documentElement.clientWidth || 1024;
+  var src;
+
+  if (width <= 600) {
+    src = 'assets/daily-hp.png';
+  } else if (width <= 1100) {
+    src = 'assets/daily-tablet.png';
+  } else {
+    src = 'assets/daily-monitor.png';
+  }
+
+  setImageSource('dailyBackground', src);
+}
+
+loadDailyResponsiveImage();
+
+var dailyResizeTimer = null;
+window.addEventListener('resize', function () {
+  clearTimeout(dailyResizeTimer);
+  dailyResizeTimer = setTimeout(loadDailyResponsiveImage, 150);
+});
 setImageSource('xrayBackground', DRIVE_IMAGE('1f7VIeNsh6CJEnwA1LSf-9LoyBRib-48-'));
 setImageSource('wtmdBackground', DRIVE_IMAGE('1BbwS8evsQTLG2p5SEJaFwSKHGL1-5L0C'));
 setImageSource('hhmdBackground', DRIVE_IMAGE('1SjotBd_oFhcoA_JLHpHP6NgYR4r2C9t6'));
