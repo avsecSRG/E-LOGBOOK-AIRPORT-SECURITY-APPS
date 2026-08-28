@@ -2045,7 +2045,7 @@ body {
     100vh;
 
   display:
-    flex;
+    none;
 
   align-items:
     center;
@@ -5955,9 +5955,14 @@ function imageLoaded() {
 function setImageSource(elementId, url) {
   var el = document.getElementById(elementId);
   if (!el) return;
-  el.src = url;
+
   el.addEventListener('load', imageLoaded, {once:true});
-  el.addEventListener('error', function(){ console.warn('Gagal memuat gambar:', url); imageLoaded(); }, {once:true});
+  el.addEventListener('error', function(){
+    console.warn('Gagal memuat gambar:', url);
+    imageLoaded();
+  }, {once:true});
+
+  el.src = url;
 }
 
 var DRIVE_IMAGE = function(id){
@@ -5995,13 +6000,14 @@ setImageSource('checklistImage', DRIVE_IMAGE('1AzOfjrJM87LTnqQU4yMZblB3C-LecarN'
 setImageSource('wtmdChecklistImage', DRIVE_IMAGE('1ZwJ7CUz1lEiWbZA4PSuijtbgTnN8GPaQ'));
 setImageSource('hhmdChecklistImage', DRIVE_IMAGE('1SuVycKMwgIa-TzKUsxWcF7Y2lTNN0m3a'));
 
-/* Pastikan layar loading tidak tertahan jika ada gambar eksternal yang lambat. */
-setTimeout(function(){
+/* Loading tidak boleh menghalangi aplikasi PWA. */
+(function hideLoadingScreen(){
   var loading = document.getElementById('loading');
   if (loading) {
     loading.classList.add('hidden');
+    loading.style.display = 'none';
   }
-}, 5000);
+})();
 
 /* =====================================================
    HOME
