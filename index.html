@@ -104,7 +104,6 @@
       width: 100%;
 
       min-height: 100vh;
-
       background: #001629;
 
       overflow-x: hidden;
@@ -136,7 +135,6 @@
     #homeImage {
 
       display: block;
-
       width: 100%;
 
       height: auto;
@@ -168,7 +166,6 @@
       padding: 0;
 
       border: none;
-
       background:
         rgba(255,255,255,0.02);
 
@@ -412,7 +409,6 @@
     .menu-content {
 
       width: 100%;
-
       max-width: 900px;
 
       margin: 0 auto;
@@ -821,6 +817,53 @@
 
         }
       );
+
+
+    /* =====================================================
+       SERVICE WORKER PWA
+    ===================================================== */
+
+    if (
+      'serviceWorker' in navigator
+    ) {
+
+      window.addEventListener(
+        'load',
+        function() {
+
+
+          navigator.serviceWorker
+            .register(
+              './service-worker.js'
+            )
+
+            .then(
+              function(registration) {
+
+                console.log(
+                  'Service Worker aktif:',
+                  registration.scope
+                );
+
+              }
+            )
+
+            .catch(
+              function(error) {
+
+                console.error(
+                  'Service Worker gagal:',
+                  error
+                );
+
+              }
+            );
+
+
+        }
+      );
+
+    }
 
 
   </script>
