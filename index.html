@@ -2458,15 +2458,6 @@ body {
    END CSS
    ===================================================== */
 
-/* =====================================================
-   LOADING OVERLAY DISABLED FOR PWA
-   Aplikasi tidak boleh tertahan oleh loading gambar eksternal.
-   ===================================================== */
-#loading {
-  display: none !important;
-}
-
-
 
 /* =====================================================
    FORM-FORM MENU + FORM KENDARAAN
@@ -5925,92 +5916,41 @@ body {
    ===================================================== */
 
 var imageCount = 0;
+var totalImages = 0;
 
-var totalImages = 8;
-
-
-/* =====================================================
-   LOADING IMAGE
-   ===================================================== */
-
-function imageLoaded() {
-
-  imageCount++;
-
-
-  if (
-    imageCount >= totalImages
-  ) {
-
-    var loading =
-      document.getElementById(
-        'loading'
-      );
-
-
-    if (loading) {
-
-      loading.classList.add(
-        'hidden'
-      );
-
-    }
-
-  }
-
+function hideLoading(){
+  var loading=document.getElementById('loading');
+  if(loading) loading.classList.add('hidden');
 }
-
 
 function setImageSource(elementId, url) {
-  var el = document.getElementById(elementId);
-  if (!el) return;
-  el.src = url;
-  el.addEventListener('load', imageLoaded, {once:true});
-  el.addEventListener('error', function(){ console.warn('Gagal memuat gambar:', url); imageLoaded(); }, {once:true});
+  var el=document.getElementById(elementId);
+  if(!el) return;
+  el.src=url;
 }
 
-var DRIVE_IMAGE = function(id){
-  return 'https://drive.google.com/uc?export=view&id=' + id;
-};
-
-/* HOME dan MENU DAILY TEST memakai aset GitHub responsif. */
-function loadDailyResponsiveImage() {
-  var width = window.innerWidth || document.documentElement.clientWidth || 1024;
-  var src;
-
-  if (width <= 600) {
-    src = 'assets/daily-hp.png';
-  } else if (width <= 1100) {
-    src = 'assets/daily-tablet.png';
-  } else {
-    src = 'assets/daily-monitor.png';
-  }
-
-  setImageSource('dailyBackground', src);
+function responsiveAsset(baseName){
+  var width=window.innerWidth || document.documentElement.clientWidth || 1024;
+  if(width<=600) return 'assets/'+baseName+'-hp.png';
+  if(width<=1100) return 'assets/'+baseName+'-tablet.png';
+  return 'assets/'+baseName+'-monitor.png';
 }
 
-loadDailyResponsiveImage();
+function loadResponsiveMenus(){
+  setImageSource('dailyBackground', responsiveAsset('daily'));
+  setImageSource('xrayBackground', responsiveAsset('xray'));
+  setImageSource('wtmdBackground', responsiveAsset('wtmd'));
+  setImageSource('hhmdBackground', responsiveAsset('hhmd'));
+  setImageSource('etdBackground', responsiveAsset('etd'));
+}
 
-var dailyResizeTimer = null;
-window.addEventListener('resize', function () {
+loadResponsiveMenus();
+var dailyResizeTimer=null;
+window.addEventListener('resize',function(){
   clearTimeout(dailyResizeTimer);
-  dailyResizeTimer = setTimeout(loadDailyResponsiveImage, 150);
+  dailyResizeTimer=setTimeout(loadResponsiveMenus,150);
 });
-setImageSource('xrayBackground', DRIVE_IMAGE('1f7VIeNsh6CJEnwA1LSf-9LoyBRib-48-'));
-setImageSource('wtmdBackground', DRIVE_IMAGE('1BbwS8evsQTLG2p5SEJaFwSKHGL1-5L0C'));
-setImageSource('hhmdBackground', DRIVE_IMAGE('1SjotBd_oFhcoA_JLHpHP6NgYR4r2C9t6'));
-setImageSource('etdBackground', DRIVE_IMAGE('1jn9PI8JdDtzyVz3lNQapWO1TidLMer0g'));
-setImageSource('checklistImage', DRIVE_IMAGE('1AzOfjrJM87LTnqQU4yMZblB3C-LecarN'));
-setImageSource('wtmdChecklistImage', DRIVE_IMAGE('1ZwJ7CUz1lEiWbZA4PSuijtbgTnN8GPaQ'));
-setImageSource('hhmdChecklistImage', DRIVE_IMAGE('1SuVycKMwgIa-TzKUsxWcF7Y2lTNN0m3a'));
-
-/* Pastikan layar loading tidak tertahan jika ada gambar eksternal yang lambat. */
-setTimeout(function(){
-  var loading = document.getElementById('loading');
-  if (loading) {
-    loading.classList.add('hidden');
-  }
-}, 5000);
+hideLoading();
 
 /* =====================================================
    HOME
