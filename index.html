@@ -5917,7 +5917,7 @@ body {
 
 var imageCount = 0;
 
-var totalImages = 9;
+var totalImages = 8;
 
 
 /* =====================================================
@@ -5994,6 +5994,14 @@ setImageSource('etdBackground', DRIVE_IMAGE('1jn9PI8JdDtzyVz3lNQapWO1TidLMer0g')
 setImageSource('checklistImage', DRIVE_IMAGE('1AzOfjrJM87LTnqQU4yMZblB3C-LecarN'));
 setImageSource('wtmdChecklistImage', DRIVE_IMAGE('1ZwJ7CUz1lEiWbZA4PSuijtbgTnN8GPaQ'));
 setImageSource('hhmdChecklistImage', DRIVE_IMAGE('1SuVycKMwgIa-TzKUsxWcF7Y2lTNN0m3a'));
+
+/* Pastikan layar loading tidak tertahan jika ada gambar eksternal yang lambat. */
+setTimeout(function(){
+  var loading = document.getElementById('loading');
+  if (loading) {
+    loading.classList.add('hidden');
+  }
+}, 5000);
 
 /* =====================================================
    HOME
