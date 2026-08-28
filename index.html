@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -8,300 +10,822 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta name="theme-color" content="#001629">
+  <!-- PWA -->
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <meta
+    name="theme-color"
+    content="#001629"
+  >
+
+  <!-- iPhone / iPad -->
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="E-LOGBOOK"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="assets/app-icon.png"
+  >
 
   <title>E-LOGBOOK AIRPORT SECURITY APPS</title>
 
+
   <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
     * {
       box-sizing: border-box;
     }
 
+
     html,
     body {
+
       margin: 0;
       padding: 0;
+
       width: 100%;
       min-height: 100%;
+
       background: #001629;
+
+      overflow-x: hidden;
+
     }
+
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      color: #ffffff;
+
     }
+
+
+    button,
+    img {
+
+      -webkit-tap-highlight-color:
+        transparent;
+
+    }
+
+
+    /* =====================================================
+       APP CONTAINER
+    ===================================================== */
 
     #app {
+
       position: relative;
+
       width: 100%;
+
       min-height: 100vh;
+
       background: #001629;
+
+      overflow-x: hidden;
+
     }
+
+
+    /* =====================================================
+       HOME
+    ===================================================== */
+
+    #home {
+
+      position: relative;
+
+      width: 100%;
+
+      min-height: 100vh;
+
+      background: #001629;
+
+    }
+
+
+    /* =====================================================
+       GAMBAR HOME
+    ===================================================== */
 
     #homeImage {
+
       display: block;
+
       width: 100%;
+
       height: auto;
+
       margin: 0;
       padding: 0;
+
       user-select: none;
+
       -webkit-user-select: none;
+
       -webkit-user-drag: none;
+
     }
 
-    /*
-      Area klik transparan.
-      Desain asli tidak digambar ulang.
-    */
+
+    /* =====================================================
+       AREA MENU
+       Transparan, hanya sebagai area klik.
+    ===================================================== */
 
     .menu-hotspot {
+
       position: absolute;
-      z-index: 10;
-      background: transparent;
-      border: none;
-      padding: 0;
+
+      z-index: 20;
+
       margin: 0;
+      padding: 0;
+
+      border: none;
+
+      background:
+        rgba(255,255,255,0.02);
+
       cursor: pointer;
+
       outline: none;
-      -webkit-tap-highlight-color: transparent;
+
+      -webkit-tap-highlight-color:
+        transparent;
+
+      touch-action: manipulation;
+
     }
 
-    .menu-hotspot:active {
-      background: rgba(255, 255, 255, 0.03);
-    }
 
     /*
-      Desktop / Monitor
+      Efek ringan ketika disentuh.
+      Desain gambar tetap tidak berubah.
     */
+
+    .menu-hotspot:active {
+
+      background:
+        rgba(255,255,255,0.05);
+
+    }
+
+
+    /* =====================================================
+       MONITOR / DESKTOP
+       Desain:
+       1672 x 941
+    ===================================================== */
 
     @media (min-width: 1101px) {
 
+
       #dailyTestButton {
+
         left: 2.5%;
-        top: 49%;
+
+        top: 48.5%;
+
         width: 15.5%;
+
         height: 27%;
+
       }
+
 
       #logBookButton {
+
         left: 18%;
-        top: 49%;
+
+        top: 48.5%;
+
         width: 15.5%;
+
         height: 27%;
+
       }
+
 
       #formFormsButton {
+
         left: 33.5%;
-        top: 49%;
+
+        top: 48.5%;
+
         width: 16.5%;
+
         height: 27%;
+
       }
+
     }
 
-    /*
-      Tablet
-    */
+
+    /* =====================================================
+       TABLET
+       Desain:
+       1448 x 1086
+    ===================================================== */
 
     @media (min-width: 601px) and (max-width: 1100px) {
 
+
       #dailyTestButton {
+
         left: 3%;
-        top: 47%;
+
+        top: 46.5%;
+
         width: 18%;
+
         height: 27%;
+
       }
+
 
       #logBookButton {
+
         left: 21.5%;
-        top: 47%;
+
+        top: 46.5%;
+
         width: 18%;
+
         height: 27%;
+
       }
+
 
       #formFormsButton {
+
         left: 40%;
-        top: 47%;
+
+        top: 46.5%;
+
         width: 19%;
+
         height: 27%;
+
       }
+
     }
 
-    /*
-      HP
-    */
+
+    /* =====================================================
+       HP
+       Desain:
+       852 x 1846
+    ===================================================== */
 
     @media (max-width: 600px) {
 
-      #dailyTestButton {
-        left: 2%;
-        top: 53%;
-        width: 31%;
-        height: 21%;
+
+      #home {
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        overflow: hidden;
+
       }
+
+
+      #homeImage {
+
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        object-fit: contain;
+
+      }
+
+
+      /*
+       * DAILY TEST
+       */
+
+      #dailyTestButton {
+
+        left: 2%;
+
+        top: 53%;
+
+        width: 31%;
+
+        height: 21%;
+
+      }
+
+
+      /*
+       * LOG BOOK
+       */
 
       #logBookButton {
+
         left: 34%;
+
         top: 53%;
+
         width: 31%;
+
         height: 21%;
+
       }
+
+
+      /*
+       * FORM-FORM
+       */
 
       #formFormsButton {
+
         left: 66%;
+
         top: 53%;
+
         width: 32%;
+
         height: 21%;
+
       }
+
     }
 
-    /*
-      Halaman menu sementara
-    */
 
-    .page {
+    /* =====================================================
+       HALAMAN MENU
+    ===================================================== */
+
+    #menuPage {
+
       display: none;
+
+      width: 100%;
+
       min-height: 100vh;
-      padding: 40px 20px;
+
       background: #001629;
-      color: white;
+
+      color: #ffffff;
+
+      padding:
+        50px 20px;
+
       text-align: center;
+
     }
 
-    .page h1 {
-      margin: 0 0 15px;
-      font-size: 32px;
-    }
 
-    .page p {
+    .menu-content {
+
+      width: 100%;
+
+      max-width: 900px;
+
       margin: 0 auto;
-      max-width: 650px;
-      line-height: 1.6;
-      opacity: 0.85;
+
     }
+
+
+    .menu-content h1 {
+
+      margin:
+        0 0 20px;
+
+      font-size: 34px;
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .menu-content p {
+
+      margin: 0 auto;
+
+      max-width: 700px;
+
+      font-size: 16px;
+
+      line-height: 1.7;
+
+      color:
+        rgba(255,255,255,0.85);
+
+    }
+
+
+    /* =====================================================
+       TOMBOL KEMBALI
+    ===================================================== */
 
     .back-button {
-      margin-top: 28px;
-      padding: 12px 28px;
-      border: 1px solid rgba(255,255,255,0.35);
+
+      margin-top: 35px;
+
+      padding:
+        13px 30px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.35);
+
       border-radius: 10px;
-      background: rgba(255,255,255,0.08);
-      color: white;
+
+      background:
+        rgba(255,255,255,0.08);
+
+      color: #ffffff;
+
       font-size: 15px;
+
       font-weight: 700;
+
       cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+
+      -webkit-tap-highlight-color:
+        transparent;
+
     }
+
+
+    .back-button:hover {
+
+      background:
+        rgba(255,255,255,0.15);
+
+    }
+
+
+    .back-button:active {
+
+      transform:
+        scale(0.97);
+
+    }
+
+
+    .back-button:focus {
+
+      outline: none;
+
+    }
+
+
+    /* =====================================================
+       MOBILE PAGE
+    ===================================================== */
+
+    @media (max-width: 600px) {
+
+
+      #menuPage {
+
+        padding:
+          35px 18px;
+
+      }
+
+
+      .menu-content h1 {
+
+        font-size: 27px;
+
+      }
+
+
+      .menu-content p {
+
+        font-size: 14px;
+
+      }
+
+
+      .back-button {
+
+        min-width: 155px;
+
+        padding:
+          13px 24px;
+
+      }
+
+    }
+
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <main id="app">
 
-    <!-- HOME -->
+
+    <!-- =================================================
+         HOME
+    ================================================== -->
+
     <section id="home">
+
 
       <picture>
 
-        <!-- HP -->
+
+        <!-- ===============================================
+             HP
+        ================================================ -->
+
         <source
           media="(max-width: 600px)"
           srcset="assets/home-hp.png"
         >
 
-        <!-- TABLET -->
+
+        <!-- ===============================================
+             TABLET
+        ================================================ -->
+
         <source
           media="(min-width: 601px) and (max-width: 1100px)"
           srcset="assets/home-tablet.png"
         >
 
-        <!-- MONITOR -->
+
+        <!-- ===============================================
+             MONITOR
+        ================================================ -->
+
         <img
+
           id="homeImage"
+
           src="assets/home-monitor.png"
-          alt="E-Logbook Airport Security"
+
+          alt="E-LOGBOOK AIRPORT SECURITY"
+
+          draggable="false"
+
         >
 
       </picture>
 
 
-      <!-- DAILY TEST -->
+      <!-- ===============================================
+           DAILY TEST
+      ================================================= -->
+
       <button
+
         id="dailyTestButton"
+
         class="menu-hotspot"
+
         type="button"
+
         aria-label="Daily Test"
-        onclick="openPage('DAILY TEST')">
-      </button>
+
+        onclick="openPage('DAILY TEST')"
+
+      ></button>
 
 
-      <!-- LOG BOOK -->
+      <!-- ===============================================
+           LOG BOOK
+      ================================================= -->
+
       <button
+
         id="logBookButton"
+
         class="menu-hotspot"
+
         type="button"
+
         aria-label="Log Book"
-        onclick="openPage('LOG BOOK')">
-      </button>
+
+        onclick="openPage('LOG BOOK')"
+
+      ></button>
 
 
-      <!-- FORM-FORM -->
+      <!-- ===============================================
+           FORM-FORM
+      ================================================= -->
+
       <button
+
         id="formFormsButton"
+
         class="menu-hotspot"
+
         type="button"
+
         aria-label="Form-Form"
-        onclick="openPage('FORM-FORM')">
-      </button>
+
+        onclick="openPage('FORM-FORM')"
+
+      ></button>
+
 
     </section>
 
 
-    <!-- HALAMAN MENU -->
-    <section id="menuPage" class="page">
+    <!-- =================================================
+         HALAMAN MENU
+    ================================================== -->
 
-      <h1 id="menuTitle"></h1>
+    <section id="menuPage">
 
-      <p id="menuText"></p>
 
-      <button
-        class="back-button"
-        type="button"
-        onclick="goHome()">
-        ← KEMBALI
-      </button>
+      <div class="menu-content">
+
+
+        <h1 id="menuTitle"></h1>
+
+
+        <p id="menuText"></p>
+
+
+        <button
+
+          class="back-button"
+
+          type="button"
+
+          onclick="goHome()"
+
+        >
+
+          ← KEMBALI
+
+        </button>
+
+
+      </div>
+
 
     </section>
+
 
   </main>
 
 
   <script>
 
+
+    /* =====================================================
+       BUKA MENU
+    ===================================================== */
+
     function openPage(menu) {
 
-      document.getElementById('home').style.display = 'none';
 
-      document.getElementById('menuPage').style.display = 'block';
+      const home =
+        document.getElementById(
+          'home'
+        );
 
-      document.getElementById('menuTitle').textContent = menu;
 
-      document.getElementById('menuText').textContent =
-        'Halaman ' + menu + ' akan kita bangun bertahap.';
+      const menuPage =
+        document.getElementById(
+          'menuPage'
+        );
 
-      window.scrollTo(0, 0);
+
+      const menuTitle =
+        document.getElementById(
+          'menuTitle'
+        );
+
+
+      const menuText =
+        document.getElementById(
+          'menuText'
+        );
+
+
+      home.style.display =
+        'none';
+
+
+      menuPage.style.display =
+        'block';
+
+
+      menuTitle.textContent =
+        menu;
+
+
+      menuText.textContent =
+        'Halaman ' +
+        menu +
+        ' akan kita bangun bertahap.';
+
+
+      window.scrollTo(
+        0,
+        0
+      );
+
     }
 
+
+    /* =====================================================
+       KEMBALI KE HOME
+    ===================================================== */
 
     function goHome() {
 
-      document.getElementById('menuPage').style.display = 'none';
 
-      document.getElementById('home').style.display = 'block';
+      const home =
+        document.getElementById(
+          'home'
+        );
 
-      window.scrollTo(0, 0);
+
+      const menuPage =
+        document.getElementById(
+          'menuPage'
+        );
+
+
+      menuPage.style.display =
+        'none';
+
+
+      home.style.display =
+        'block';
+
+
+      window.scrollTo(
+        0,
+        0
+      );
+
     }
+
+
+    /* =====================================================
+       PENCEGAHAN DRAG GAMBAR
+    ===================================================== */
+
+    document
+      .getElementById('homeImage')
+      .addEventListener(
+        'dragstart',
+        function(event) {
+
+          event.preventDefault();
+
+        }
+      );
+
 
   </script>
 
+
 </body>
+
 </html>
