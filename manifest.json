@@ -1,1 +1,25 @@
-
+{
+  "name": "E-LOGBOOK AIRPORT SECURITY APPS",
+  "short_name": "E-LOGBOOK",
+  "description": "Digital Security Inspection & Monitoring System",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#001629",
+  "theme_color": "#001629",
+  "icons": [
+    {
+      "src": "assets/app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/app-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
