@@ -11780,9 +11780,13 @@ function hideAll() {
   }
   if('serviceWorker' in navigator){
     window.addEventListener('load',function(){
-      navigator.serviceWorker.register('./service-worker.js').catch(function(err){
-        console.warn('Service Worker gagal didaftarkan:', err);
-      });
+      navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' })
+        .then(function(registration){
+          return registration.update();
+        })
+        .catch(function(err){
+          console.warn('Service Worker gagal didaftarkan:', err);
+        });
     });
   }
 })();
