@@ -66,10 +66,10 @@ body {
     translate(-50%, -50%);
 
   width:
-    min(100vw, 150vh);
+    min(100vw, 177.7777778vh);
 
   aspect-ratio:
-    3 / 2;
+    16 / 9;
 
   overflow: hidden;
 
@@ -3275,6 +3275,49 @@ body {
   object-position:top center !important;
   pointer-events:none !important;
 }
+
+/* =====================================================
+   DESKTOP / LAPTOP MONITOR
+   Gunakan artwork monitor 16:9 dan pastikan seluruh desain
+   terlihat utuh di viewport tanpa terpotong.
+   ===================================================== */
+@media (min-width:1101px){
+  .stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:min(100vw, 177.7777778vh) !important;
+    height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:16 / 9 !important;
+    overflow:hidden !important;
+  }
+
+  .responsive-home-stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:min(100vw, 177.7777778vh) !important;
+    height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:16 / 9 !important;
+    overflow:hidden !important;
+    background:#001629 !important;
+  }
+
+  .responsive-home-stage .home-responsive-image{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    object-fit:contain !important;
+    object-position:center !important;
+  }
+}
+
 @media (min-width:1101px){
   #homeDaily{left:3% !important;top:48% !important;width:16% !important;height:28% !important;}
   #homeLogbook{left:21% !important;top:48% !important;width:16% !important;height:28% !important;}
@@ -3290,6 +3333,202 @@ body {
   #homeDaily{left:3% !important;top:48% !important;width:16% !important;height:28% !important;}
   #homeLogbook{left:21% !important;top:48% !important;width:16% !important;height:28% !important;}
   #homeForms{left:38.5% !important;top:48% !important;width:16% !important;height:28% !important;}
+}
+</style>
+
+
+<style>
+/* =====================================================
+   RESPONSIVE ARTWORK SYSTEM
+   Monitor / Tablet / Handphone memakai artwork masing-masing
+   tanpa merubah isi, form, atau fungsi aplikasi.
+   ===================================================== */
+
+/* MONITOR / LAPTOP : artwork 1672x941 ≈ 16:9 */
+@media (min-width:1101px){
+  html, body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+  }
+
+  .stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:min(100vw, 177.7777778vh) !important;
+    height:auto !important;
+    aspect-ratio:1672 / 941 !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+  }
+
+  .stage > .background{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:fill !important;
+  }
+
+  .responsive-home-stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:min(100vw, 177.7777778vh) !important;
+    height:auto !important;
+    aspect-ratio:1672 / 941 !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+  }
+
+  .responsive-home-stage .home-responsive-image{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:fill !important;
+  }
+}
+
+/* TABLET : artwork 1536x1024 ≈ 3:2 */
+@media (min-width:601px) and (max-width:1100px){
+  html, body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+  }
+
+  .stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:min(100vw, 150vh) !important;
+    height:auto !important;
+    aspect-ratio:3 / 2 !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+  }
+
+  .stage > .background{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:fill !important;
+  }
+
+  .responsive-home-stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:min(100vw, 150vh) !important;
+    height:auto !important;
+    aspect-ratio:3 / 2 !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+  }
+
+  .responsive-home-stage .home-responsive-image{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:fill !important;
+  }
+}
+
+/* HANDPHONE : artwork 853x1844 ≈ 0.4626 */
+@media (max-width:600px){
+  html, body{
+    width:100%;
+    min-height:100%;
+    height:auto;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+  }
+
+  .stage{
+    position:relative !important;
+    left:auto !important;
+    top:auto !important;
+    transform:none !important;
+    width:100vw !important;
+    height:calc(100vw * 1844 / 853) !important;
+    aspect-ratio:853 / 1844 !important;
+    min-height:0 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+  }
+
+  .stage > .background{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:fill !important;
+  }
+
+  .responsive-home-stage{
+    position:relative !important;
+    left:auto !important;
+    top:auto !important;
+    transform:none !important;
+    width:100vw !important;
+    height:calc(100vw * 1846 / 852) !important;
+    aspect-ratio:852 / 1846 !important;
+    min-height:0 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+  }
+
+  .responsive-home-stage .home-responsive-image{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:fill !important;
+  }
+
+  /* Log Book artwork portrait */
+  #logbookPage{
+    position:absolute !important;
+    left:0 !important;
+    top:0 !important;
+    width:100vw !important;
+    height:calc(100vw * 1844 / 853) !important;
+    min-height:0 !important;
+    display:none;
+    overflow:hidden !important;
+    align-items:stretch !important;
+    justify-content:flex-start !important;
+  }
+
+  #logbookPage.active{
+    display:flex !important;
+  }
+
+  .logbook-bg-wrap{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+  }
+
+  .logbook-bg-wrap picture,
+  .logbook-bg-wrap img{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+  }
+
+  .logbook-bg-wrap img{
+    object-fit:fill !important;
+  }
 }
 </style>
 
