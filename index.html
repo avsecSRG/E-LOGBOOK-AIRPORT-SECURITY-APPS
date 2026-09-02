@@ -3635,7 +3635,12 @@ body {
 }
 
 #logbookPage .logbook-back-button{
-  z-index:5 !important;
+  position:absolute !important;
+  left:2% !important;
+  top:88% !important;
+  z-index:50005 !important;
+  pointer-events:auto !important;
+  cursor:pointer !important;
 }
 
 /* 3) TABLET — artwork 3:2, area klik tetap sesuai desain tablet */
@@ -3880,6 +3885,56 @@ body {
   #btnBackEtd{left:6.0% !important;top:90.2% !important;width:31.0% !important;height:5.8% !important;}
 }
 </style>
+
+<style id="mobile-menu-click-precision-fix">
+/* MOBILE MENU CLICK PRECISION FIX
+   Hanya memperbaiki area klik menu perangkat dan tombol Kembali.
+   Desain/artwork dan fungsi lain tidak diubah. */
+@media (max-width:600px){
+  /* X-RAY — mengikuti batas tombol pada artwork 853x1844 */
+  #xrayHbsBarat{left:5.86% !important;top:41.20% !important;width:41.58% !important;height:6.93% !important;}
+  #xrayHbsTimur{left:50.18% !important;top:41.20% !important;width:41.50% !important;height:6.93% !important;}
+  #xrayLdt{left:5.86% !important;top:49.13% !important;width:41.58% !important;height:6.93% !important;}
+  #xrayVip{left:50.18% !important;top:49.13% !important;width:41.50% !important;height:6.93% !important;}
+  #xrayCentral1{left:5.86% !important;top:57.27% !important;width:41.58% !important;height:6.93% !important;}
+  #xrayCentral2{left:50.18% !important;top:57.27% !important;width:41.50% !important;height:6.93% !important;}
+  #xrayLags{left:5.86% !important;top:65.56% !important;width:41.58% !important;height:6.93% !important;}
+  #xrayKargoDomestik{left:50.18% !important;top:65.56% !important;width:41.50% !important;height:6.93% !important;}
+  #xrayKargoInternational{left:5.86% !important;top:73.70% !important;width:41.58% !important;height:6.93% !important;}
+  #xrayMainGate{left:50.18% !important;top:73.70% !important;width:41.50% !important;height:6.93% !important;}
+  #btnBackXray{left:31.0% !important;top:89.35% !important;width:35.5% !important;height:5.25% !important;}
+
+  /* WTMD */
+  #wtmdLdt{left:6.20% !important;top:45.23% !important;width:49.15% !important;height:6.35% !important;}
+  #wtmdVip{left:6.20% !important;top:52.55% !important;width:49.15% !important;height:6.35% !important;}
+  #wtmdCentral1{left:6.20% !important;top:59.98% !important;width:49.15% !important;height:6.35% !important;}
+  #wtmdCentral2{left:6.20% !important;top:67.47% !important;width:49.15% !important;height:6.35% !important;}
+  #wtmdMainGate{left:6.20% !important;top:74.89% !important;width:49.15% !important;height:6.35% !important;}
+  #btnBackWtmd{left:29.0% !important;top:90.0% !important;width:33.0% !important;height:5.15% !important;}
+
+  /* HHMD */
+  #hhmdCeia{left:5.75% !important;top:34.25% !important;width:45.75% !important;height:6.35% !important;}
+  #hhmdGarrett{left:5.75% !important;top:41.58% !important;width:45.75% !important;height:6.35% !important;}
+  #btnBackHhmd{left:30.2% !important;top:87.35% !important;width:34.9% !important;height:5.45% !important;}
+
+  /* ETD */
+  #etdExploscan1{left:6.10% !important;top:29.34% !important;width:59.90% !important;height:6.20% !important;}
+  #etdExploscan2{left:6.10% !important;top:36.39% !important;width:59.90% !important;height:6.20% !important;}
+  #etdSafran{left:6.10% !important;top:43.28% !important;width:59.90% !important;height:6.20% !important;}
+  #btnBackEtd{left:30.1% !important;top:89.40% !important;width:34.0% !important;height:5.25% !important;}
+
+  /* Pastikan seluruh overlay tombol menerima sentuhan */
+  #xrayStage .click-area,
+  #wtmdStage .click-area,
+  #hhmdStage .click-area,
+  #etdStage .click-area{
+    z-index:100000 !important;
+    pointer-events:auto !important;
+    touch-action:manipulation !important;
+  }
+}
+</style>
+
 </head>
 
 
