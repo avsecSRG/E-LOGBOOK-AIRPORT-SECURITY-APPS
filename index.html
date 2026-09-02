@@ -3203,6 +3203,40 @@ body {
   background: #fff1f1 !important;
   box-shadow: 0 0 0 2px rgba(212,0,0,.12) !important;
 }
+
+/* =====================================================
+   LOG BOOK PAGE (IMAGE BACKGROUND)
+   ===================================================== */
+
+#logbookPage {
+  padding: 0 !important;
+  gap: 0 !important;
+}
+
+.logbook-bg-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.logbook-bg-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.logbook-back-button {
+  position: absolute;
+  left: 2%;
+  top: 88%;
+  z-index: 2;
+}
 </style>
 
 
@@ -3614,16 +3648,17 @@ body {
   id="logbookPage"
   class="sub-page">
 
-  <h1>
-    LOG BOOK
-  </h1>
-
-  <p>
-    Halaman Log Book akan dibuat berikutnya.
-  </p>
+  <div class="logbook-bg-wrap">
+    <picture>
+      <source media="(max-width: 600px)" srcset="assets/logbook-hp.png">
+      <source media="(min-width: 601px) and (max-width: 1100px)" srcset="assets/logbook-tablet.png">
+      <img src="assets/logbook-monitor.png" alt="LOG BOOK">
+    </picture>
+  </div>
 
   <button
     type="button"
+    class="logbook-back-button"
     onclick="goHome()">
     ← Kembali
   </button>
@@ -3636,7 +3671,7 @@ body {
      FORM-FORM MENU
      ===================================================== -->
 <div id="formsPage" class="sub-page">
-  <img class="forms-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background Form">
+  <img class="forms-bg" src="assets/forms-background.png" alt="Background Form">
   <div class="forms-overlay"></div>
   <div class="forms-content">
     <div class="forms-title">FORM-FORM</div>
@@ -3671,7 +3706,7 @@ body {
      FORM KENDARAAN
      ===================================================== -->
 <div id="vehicleFormPage">
-  <img class="vehicle-page-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background">
+  <img class="vehicle-page-bg" src="assets/forms-background.png" alt="Background">
   <div class="vehicle-overlay"></div>
 
   <div class="vehicle-card">
@@ -3741,7 +3776,7 @@ body {
      FORM PEMERIKSAAN ACAK & TIDAK TERDUGA KENDARAAN
      ===================================================== -->
 <div id="randomVehicleFormPage">
-  <img class="vehicle-page-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background">
+  <img class="vehicle-page-bg" src="assets/forms-background.png" alt="Background">
   <div class="vehicle-overlay"></div>
 
   <div class="vehicle-card">
@@ -3806,7 +3841,7 @@ body {
      FORM PEMERIKSAAN KHUSUS
      ===================================================== -->
 <div id="specialFormPage">
-  <img class="vehicle-page-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background">
+  <img class="vehicle-page-bg" src="assets/forms-background.png" alt="Background">
   <div class="vehicle-overlay"></div>
 
   <div class="vehicle-card">
@@ -3872,7 +3907,7 @@ body {
      FORM PEMERIKSAAN ACAK (RANDOM CHECK) ORANG DAN BARANG
      ===================================================== -->
 <div id="randomCheckFormPage">
-  <img class="vehicle-page-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background">
+  <img class="vehicle-page-bg" src="assets/forms-background.png" alt="Background">
   <div class="vehicle-overlay"></div>
 
   <div class="vehicle-card">
@@ -3937,7 +3972,7 @@ body {
      FORM PEMERIKSAAN TIDAK TERDUGA (UNPREDICTABLE) ORANG DAN BARANG
      ===================================================== -->
 <div id="unpredictableFormPage">
-  <img class="vehicle-page-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background">
+  <img class="vehicle-page-bg" src="assets/forms-background.png" alt="Background">
   <div class="vehicle-overlay"></div>
 
   <div class="vehicle-card">
@@ -4000,7 +4035,7 @@ body {
      FORM PENCATATAN PROHIBITED ITEM YANG DIBAWA KE DKT
      ===================================================== -->
 <div id="prohibitedFormPage">
-  <img class="vehicle-page-bg" src="https://drive.google.com/uc?export=view&id=1_jxMJinIcZrwWCDWJfBD6Z63zNgkqibg" alt="Background">
+  <img class="vehicle-page-bg" src="assets/forms-background.png" alt="Background">
   <div class="vehicle-overlay"></div>
 
   <div class="vehicle-card">
@@ -6079,6 +6114,9 @@ function openXrayChecklist(
     )
     .value =
     locationName;
+
+
+  setImageSource('checklistImage', 'assets/diagram-xray.png');
 
 
   generateChecklistBoxes();
@@ -8168,6 +8206,9 @@ function openWtmdChecklist(
     locationName;
 
 
+  setImageSource('wtmdChecklistImage', 'assets/diagram-wtmd.png');
+
+
   generateWtmdChecklistBoxes();
 
 
@@ -8924,6 +8965,9 @@ function openHhmdChecklist(
     )
     .value =
     alatName;
+
+
+  setImageSource('hhmdChecklistImage', 'assets/diagram-hhmd.png');
 
 
   setDefaultHhmdDate();
