@@ -1,22 +1,10 @@
-const CACHE_NAME = 'elogbook-airport-security-v3';
+const CACHE_NAME = 'elogbook-airport-security-v4';
 
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
-
-  './assets/app-icon.png',
-
-  './assets/home-hp.png',
-  './assets/home-tablet.png',
-  './assets/home-monitor.png',
-
-  './assets/daily-hp.png',
-  './assets/daily-tablet.png',
-  './assets/daily-monitor.png',
-
-  './assets/icon-192.png',
-  './assets/icon-512.png'
+  './assets/app-icon.png'
 ];
 
 self.addEventListener('install', event => {
@@ -29,48 +17,77 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
+    caches.keys()
+      .then(keys => Promise.all(
         keys
           .filter(key => key !== CACHE_NAME)
           .map(key => caches.delete(key))
-      )
-    ).then(() => self.clients.claim())
+      ))
+      .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
+  const request = event.request;
+
+  if (request.method !== 'GET') return;
+
+  const url = new URL(request.url);
+
+  // HTML / halaman utama:
+  // selalu mengambil versi terbaru dari GitHub Pages.
+  if (
+    request.mode === 'navigate' ||
+    url.pathname.endsWith('/index.html') ||
+    url.pathname.endsWith('/E-LOGBOOK-AIRPORT-SECURITY-APPS/')
+  ) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then(response => {
+          if (response && response.ok) {
+            const clone = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put('./index.html', clone);
+              });
+          }
+
+          return response;
+        })
+        .catch(() => {
+          return caches.match('./index.html');
+        })
+    );
+
     return;
   }
 
+  // Asset lainnya:
+  // gunakan cache terlebih dahulu agar loading cepat.
   event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
+    caches.match(request)
+      .then(cached => {
+        if (cached) {
+          return cached;
         }
 
-        return fetch(event.request)
-          .then(networkResponse => {
-
+        return fetch(request)
+          .then(response => {
             if (
-              networkResponse &&
-              networkResponse.status === 200 &&
-              networkResponse.type === 'basic'
+              response &&
+              response.ok &&
+              response.type === 'basic'
             ) {
-              const responseClone = networkResponse.clone();
+              const clone = response.clone();
 
               caches.open(CACHE_NAME)
                 .then(cache => {
-                  cache.put(event.request, responseClone);
+                  cache.put(request, clone);
                 });
             }
 
-            return networkResponse;
-          })
-          .catch(() => {
-            return caches.match('./index.html');
+            return response;
           });
       })
   );
